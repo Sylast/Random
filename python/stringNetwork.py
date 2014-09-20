@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import numpy as np
 import sys
+import os.path
 
 #stringNetwork [word] [wordlist.txt]
 def LevenNumber( word, target ):
@@ -37,6 +38,38 @@ def LevenNumber( word, target ):
 			#print m
 	return m[len(word)-1, len(target)-1]
 
-#file word.txt = open(argv[1], 'r')
-#wordList = [sys.argv[0]]
+def help():
+	print
+	print "stringNetwork [word] [wordlist.txt]"
+	print "word -- the word that the network will be made for"
+	print "wordlist.txt -- the file that has the population of words for the network"
+	print
 
+if len(sys.argv) < 3 or not os.path.exists(sys.argv[2]):
+	help()
+	exit()
+word = sys.argv[1]
+wordlist = open(sys.argv[2], 'r')
+
+fnetwork = []
+ffnetwork = [[],[]]
+fffnetwork = [[],[],[]]
+f 	= 0
+ff	= 0
+fff	= 0 
+
+for ftarget in wordlist:
+	if LevenNumber(word, ftarget) == 1:
+		print ftarget
+		fnetwork.append(ftarget)
+		#for fftarget in wordlist:
+		#	if LevenNumber(word, fftarget) == 1:
+		#		ffnetwork.append(fftarget)
+		#		for ffftarget in wordlist:
+		#			if LevenNumber(word, ffftarget) == 1:
+		#				fffnetwork.append(ffftarget)
+	
+print "%s's Friends:" %word
+print fnetwork 
+print ffnetwork
+print fffnetwork
